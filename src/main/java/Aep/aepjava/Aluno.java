@@ -7,7 +7,12 @@ public class Aluno {
 	public Aluno(int ra, String nome) {
 		this.ra = ra;
 		this.nome = nome;
-		
+	}
+	public String getNome() {
+		return nome;
+	}
+	public int getRA() {
+		return ra;
 	}
 	
 }
