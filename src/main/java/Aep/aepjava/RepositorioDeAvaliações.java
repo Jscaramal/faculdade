@@ -9,8 +9,13 @@ public class RepositorioDeAvaliações {
 		this.avaliações.add(avaliação);
 	}
 
-	public Aluno obterAprovados(Disciplina disciplina) {
-
+	public Aluno[] obterAprovados(Disciplina disciplina) {
+		ArrayList<Aluno> alunosAprovado = new ArrayList<Aluno>();
+		
+		Aluno[] alunosAprovados = new Aluno[1];
+		
+		
+		
 		for (Avaliação avaliação : avaliações) {
 			Disciplina disciplinaNome = avaliação.getDisciplina();
 			if (disciplinaNome == disciplina) {
@@ -18,7 +23,7 @@ public class RepositorioDeAvaliações {
 				Aluno aluno = avaliação.getAluno();
 				int raAluno = aluno.getRA();
 				float notaTotal = avaliação.getNota();
-				int contador = 1;
+
 				// percorre as proximas avaliações comparando se a disciplina é a mesma;
 				for (Avaliação avaliaçãoSeguinte : avaliações) {
 					Disciplina disciplinaNomeSeguinte = avaliaçãoSeguinte.getDisciplina();
@@ -26,17 +31,16 @@ public class RepositorioDeAvaliações {
 						if (avaliaçãoSeguinte.getAluno().getRA() == raAluno) { // se o aluno da avaliaçãoSeguinte for
 																				// igual ao aluno da avaliação...
 							notaTotal += avaliaçãoSeguinte.getNota(); // atribui a nota da avaliação seguinte no total
-							contador++;
 						}
 					}
 				}
-				float mediaNota = notaTotal / contador;
+				float mediaNota = notaTotal / 4;
 				if (mediaNota > 60) {
-					return aluno;
+					alunosAprovados[0] = aluno;
 				}
 			}
 		}
 
-		return null;
+		return alunosAprovados;
 	}
 }
